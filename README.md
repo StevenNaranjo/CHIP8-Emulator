@@ -52,7 +52,7 @@ The most common used font it's:
 | E   | 0xF0, 0x80, 0xF0, 0x80, 0xF0   |
 | F   | 0xF0, 0x80, 0xF0, 0x80, 0x80   |
 
-The implementation of this, it's on ==`src/memory.py`== 
+The implementation of this, it's on `src/memory.py` 
 
 **Build with <3 by Alex Naranjo.**
 **Costa Rica 🇨🇷**
