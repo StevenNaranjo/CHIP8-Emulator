@@ -54,36 +54,38 @@ The most common used font it's:
 
 The implementation of this, it's on `src/memory.py` 
 
-## :nerd Terms:
+## 🤓 Terms
 
-### G
-General Porpuse Registers 
-: Registers inside a CPU used to temporarily hold data, addresses, or results of operations. They can be used for a wide range of tasks during instruction execution.
+### G 
+- **General Purpose Registers**: Registers inside a CPU used to temporarily hold data, addresses, or results of operations. They can be used for a wide range of tasks during instruction execution.
 
-
+---
 
 ### I
-Index Register 
-: A special register that holds a memory address used to indirectly access data in RAM, often in loops or array-like structures.
+- **Index Register**: A special register that holds a memory address used to indirectly access data in RAM, often in loops or array-like structures.
 
-### J
-Jump
-: An instruction that changes the normal sequential flow of a program by moving the instruction pointer (or program counter) to a new memory address.
+---
+
+### J 
+- **Jump**: An instruction that changes the normal sequential flow of a program by moving the instruction pointer (or program counter) to a new memory address.
+
+---
 
 ### P
-Program Counter 
-: A register that holds the address of the next instruction to execute. It updates automatically as the program runs, and can be modified directly by jumps, calls, or branches.
+- **Program Counter**: A register that holds the address of the next instruction to execute. It updates automatically as the program runs, and can be modified directly by jumps, calls, or branches.
 
-### R
-Register
-: A small, fast storage location within the CPU used to store data, addresses, or instructions during computation. Registers are faster than RAM and essential to processor operations.
+---
 
-### S
-Stack 
-: A data structure that follows the Last In, First Out (LIFO) principle. It is used to store return addresses, function calls, or local variables, and is manipulated with push and pop operations.
+### R  
+- **Register**: A small, fast storage location within the CPU used to store data, addresses, or instructions during computation. Registers are faster than RAM and essential to processor operations.
 
+---
 
+### S   
+- **Stack**: A data structure that follows the Last In, First Out (LIFO) principle. It is used to store return addresses, function calls, or local variables, and is manipulated with push and pop operations.
 
-**Build with :heart by Alex Naranjo.**
+---
+
+**Built with ❤️ by Alex Naranjo**  
 **Costa Rica 🇨🇷**
 
