@@ -12,3 +12,72 @@
  \______/ |__/  |__/|______/|__/       \______/       |________/|__/     |__/ \______/ |________/|__/  |__/   |__/   \______/ |__/  |__/
 
 """
+import time
+import pygame #for the display
+import re # for regular expressions
+from display import Display
+from memory import Memory
+
+class Chip8():
+    def __init__(self):
+        self.MEMORY = Memory()
+        self.DISPLAY = Display()
+    
+    def cycle(self):
+        #This function it's gonna use the memory and the PC, and it takes a look for the ROM's intructions
+        #this function should calls decode_and_execute, and this should use the PC
+
+        PC = self.MEMORY.PC
+        firstSet = self.MEMORY.MEM[PC] << 8
+        secondSet = self.MEMORY.MEM[PC+1]
+        opcode = firstSet | secondSet
+        if PC >= 0x200 + self.MEMORY.ROM_SIZE:
+            print("End of ROM reached.")
+            self.MEMORY.PC = 0x200
+            time.sleep(2)
+            return
+        
+        #HERE WE CALL THE DECODE AND EXECUTE FUNCTION
+        self.decode_and_execute(opcode)
+        #AND ALSO WE NEED TO INCREMENT THE PC, BUT I THINK THAT WE SHOULD HAVE CARE WITH THIS A THE MOMENT
+        self.MEMORY.PC += 1
+
+    def decode_and_execute(self, opcode):
+        #this receive the opcodes, and translate them, and execute them
+        hexCode = f"{opcode:04X}"
+        if opcode == "00E0":
+            #this clean the screen
+            self.DISPLAY.clearScreen()
+        else:
+            print(f"the opcode {hexCode} haven't been implemented yet")
+
+    def run(self):
+        
+        #We need the load the ROM and the FONT
+        self.MEMORY.loadFont()
+        self.MEMORY.loadROM("./roms/1-chip8-logo.ch8")
+        
+        running = True
+
+        while running:
+            # poll for events
+            # pygame.QUIT event means the user clicked X to close your window
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+
+            #SO HERE WE SHOULD HAVE THE CALL TO cycle(), to reflect the changes in the display:
+            self.cycle()
+
+            #! self.DISPLAY.draw_pixel(32,16) !THIS WAS JUST TESTING
+
+            # this renders the screen
+            self.DISPLAY.render()
+            self.DISPLAY.clock.tick(60)  # limits FPS to 60
+
+        pygame.quit()
+
+print("HI!")
+chip = Chip8()
+chip.DISPLAY.drawMyName()
+chip.run()

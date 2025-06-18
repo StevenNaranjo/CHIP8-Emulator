@@ -144,6 +144,9 @@ class Memory():
         if instructions:  # Print wha
             print(instructions)
 
+"""
+!TESTING
+
 mem = Memory()
 print("__________________Memory before load the FONTS___________________")
 mem.printMemV2(80, 165)
@@ -157,3 +160,4 @@ end = mem.ROM_SIZE + 0x200
 mem.printMemV2(0x200, end)
 print("__________________Instructions___________________")
 mem.printInstructions()
+"""
