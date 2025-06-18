@@ -100,7 +100,7 @@ According to Tobias the display's size is 64 pixels wide and 32 pixels tall. And
 But this is so small so, I am going to use a scale about to 10, to get a moderate size
 The display has a refresh rate of 60hz (60FPS)
 
-> Based on Tobias: The details of the drawing instruction DXYN are found below, but in short, it is used to draw a “sprite” on the screen. Each sprite consists of 8-bit bytes, where each bit corresponds to a horizontal pixel; sprites are between 1 and 15 bytes tall. They’re drawn to the screen by treating all 0 bits as transparent, and all the 1 bits will “flip” the pixels in the locations of the screen that it’s drawn to. (You might recognize this as logical XOR.)
+> Based on **[Tobias](https://tobiasvl.github.io/blog/write-a-chip-8-emulator/#display)**: The details of the drawing instruction DXYN are found below, but in short, it is used to draw a “sprite” on the screen. Each sprite consists of 8-bit bytes, where each bit corresponds to a horizontal pixel; sprites are between 1 and 15 bytes tall. They’re drawn to the screen by treating all 0 bits as transparent, and all the 1 bits will “flip” the pixels in the locations of the screen that it’s drawn to. (You might recognize this as logical XOR.)
 
 The implementation of this, it's on `src/display.py`
 > By the way, I've never worked with PyGame before, so I need to take a look to the **[Documentation](https://www.pygame.org/docs/)** 
