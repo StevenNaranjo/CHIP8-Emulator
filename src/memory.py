@@ -1,4 +1,7 @@
 # Implementation of the Memory class
+import time
+
+
 class Memory():
     #This is the class that allows emulate the Chip8's memory
     def __init__(self):
@@ -28,6 +31,7 @@ class Memory():
         self.VX = [0]*16 #General Porpuse Registers
         self.PC = 0x200 #Program Counter, it starts at 0x200 (512dec) because the ROMs, start being loaded from there, we'll use this one to make jumps
         self.I = 0 #Index Register
+        self.ROM_SIZE = 0 # I'll use this to print all the ROM content 
 
     #What methods do I need?
 
@@ -40,8 +44,18 @@ class Memory():
 
     #Load ROM
     def loadROM(self, ROM):
-        #TODO 
-        pass
+        # Load a .ch8 (the file extension for the roms of chip8) file in the memory
+        try:
+            with open(ROM, 'rb') as file: # rb stands for read binary
+                rom_data = file.read()
+                self.ROM_SIZE = len(rom_data)
+                for i in range(len(rom_data)):
+                    self.MEM[0x200 + i] = rom_data[i]
+                print("ROM loaded succesfully")
+        except FileNotFoundError:
+            print(f"Error: ROM file '{ROM}' not found.")
+        except Exception as e:
+            print(f"An error occurred while loading the ROM: {e}")
 
     #Print memory
     def printMem(self):
@@ -55,7 +69,7 @@ class Memory():
                 formatedText = ""
                 counter = 0
             else:
-                formatedText += f" |{counterHex:03X}->{self.MEM[i]:03X} |"
+                formatedText += f" |{counterHex:03X}->{self.MEM[i]:02X} |"
                 counterHex += 1
                 counter +=1
 
@@ -81,17 +95,65 @@ class Memory():
                 print(formatedText)
                 formatedText = ""
                 counter = 0
-            formatedText += f" |{start:03X}->{self.MEM[start]:03X} |"
+            formatedText += f" |{start:03X}->{self.MEM[start]:02X} |"
             counter +=1
             start += 1
 
-    #Print ROMs Instruccions
-    def printROM():
-        pass
+    def printInstructions(self):
+        # This function print the set of instruccions in a pretty way to easy understanding
+        """
+            How does this work?
+            Suppose that we have the following bytes in memory:
+                
+            self.MEM[0x200]     = 0xA2   binary 10100010
+            self.MEM[0x201]     = 0xF0   binary 11110000
+            
+            So we want to combine these two bytes into one 16-bit instruction (2bytes).
+            First, we shift the first byte (0xA2) 8 bits to the left:
     
+                0xA2 << 8 = 0xA200 = 10100010 00000000
+
+            Then, we use the OR operator '|' to combine it with the second byte (0xF0):
+                10100010 00000000   (0xA2 shifted left)
+            OR  00000000 11110000   (0xF0)
+                --------------------
+                10100010 11110000   => 0xA2F0
+
+            So the full instruction is now correctly combined into 0xA2F0.
+        """
+        instructions = ""
+        counter = 0
+        start = 0x200
+        i = 0
+
+        while i < self.ROM_SIZE - 1:
+            if counter == 8:
+                print(instructions)
+                instructions = ""
+                counter = 0
+            instr = (self.MEM[start + i] << 8) | self.MEM[start + i + 1] #this is a bit shift so of this way we can combine the set of instruction
+            instructions += f" |{instr:04X}|" # f" |{start+i:03X}-{start+i+1:03X}:{instr:04X} |" use this if you wanna see the mem direction
+            i += 2
+            counter += 1
+
+        # if ROM_SIZE is odd
+        if i < self.ROM_SIZE:
+            last_byte = self.MEM[start + i]
+            instructions += f" |{start+i:03X}: {last_byte:02X} (dangling byte) |"
+
+        if instructions:  # Print wha
+            print(instructions)
 
 mem = Memory()
+print("__________________Memory before load the FONTS___________________")
 mem.printMemV2(80, 165)
 mem.loadFont()
-print("_____________________________________")
+print("__________________Memory after load the FONTS___________________")
 mem.printMemV2(80, 165)
+print("__________________ROM-Loaded___________________")
+mem.loadROM("./roms/1-chip8-logo.ch8") #Change this based in your SO, in my case Im from linux
+print("__________________ROM___________________")
+end = mem.ROM_SIZE + 0x200
+mem.printMemV2(0x200, end)
+print("__________________Instructions___________________")
+mem.printInstructions()

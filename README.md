@@ -118,7 +118,7 @@ The implementation of this, it's on `src/memory.py`
 
 ### R  
 - **Register**: A small, fast storage location within the CPU used to store data, addresses, or instructions during computation. Registers are faster than RAM and essential to processor operations.
-
+- **ROM**: Stands for Read-Only Memory
 ---
 
 ### S   
