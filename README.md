@@ -21,6 +21,46 @@ A functional CHIP-8 emulator written in Python.
 - 16 8-bit (one byte) general-purpose variable registers numbered 0 through F hexadecimal, ie. 0 through 15 in decimal, called V0 through VF
     - VF is also used as a flag register; many instructions will set it to either 1 or 0 based on some rule, for example using it as a carry flag
 
+### Opcodes
+|Opcode | Description                                                                                                                       | Implemented?  |
+|-------|-----------------------------------------------------------------------------------------------------------------------------------|---------------|
+|00E0   |clear the screen                                                                                                                   |No             |
+|00EE   |return from subroutine to address pulled from stack                                                                                |No             |
+|0nnn   |jump to native assembler subroutine at 0xNNN                                                                                       |No             |
+|1nnn   |jump to address NNN                                                                                                                |No             |
+|2nnn   |push return address onto stack and call subroutine at address NNN                                                                  |No             |
+|3xnn   |skip next opcode if vX == NN                                                                                                       |No             |
+|4xnn   |skip next opcode if vX != NN                                                                                                       |No             |
+|5xy0   |skip next opcode if vX == vY                                                                                                       |No             |
+|6xnn   |set vX to NN                                                                                                                       |No             |
+|7xnn   |add NN to vX                                                                                                                       |No             |
+|8xy0   |set vX to the value of vY                                                                                                          |No             |
+|8xy1   |set vX to the result of bitwise vX OR vY                                                                                           |No             |
+|8xy2   |set vX to the result of bitwise vX AND vY                                                                                          |No             |
+|8xy3   |set vX to the result of bitwise vX XOR vY                                                                                          |No             |
+|8xy4   |add vY to vX, vF is set to 1 if an overflow happened, to 0 if not, even if X=F!                                                    |No             |
+|8xy5   |subtract vY from vX, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                                            |No             |
+|8xy6   |set vX to vY and shift vX one bit to the right, set vF to the bit shifted out, even if X=F!                                        |No             |
+|8xy7   |set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                 |No             |
+|8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |No             |
+|9xy0   |skip next opcode if vX != vY (note: on platforms that have 4 byte opcodes, like F000 on XO-CHIP, this needs to skip four bytes)    |No             |
+|Annn   |set I to NNN                                                                                                                       |No             |
+|Bnnn   |jump to address NNN + v0                                                                                                           |No             |
+|Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |No             |
+|Dxyn   |draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed                                  |No             |
+|Ex9E   |skip next opcode if key in the lower 4 bits of vX is pressed                                                                       |No             |
+|ExA1   |skip next opcode if key in the lower 4 bits of vX is not pressed                                                                   |No             |
+|Fx07   |set vX to the value of the delay timer                                                                                             |No             |
+|Fx0A   |wait for a key pressed and released and set vX to it, in megachip mode it also updates the screen like clear                       |No             |
+|Fx15   |set delay timer to vX                                                                                                              |No             |
+|Fx18   |set sound timer to vX, sound is played as long as the sound timer reaches zero                                                     |No             |
+|Fx1E   |add vX to I                                                                                                                        |No             |
+|Fx29   |set I to the 5 line high hex sprite for the lowest nibble in vX                                                                    |No             |
+|Fx33   |write the value of vX as BCD value at the addresses I, I+1 and I+2                                                                 |No             |
+|Fx55   |write the content of v0 to vX at the memory pointed to by I, I is incremented by X+1                                               |No             |
+|Fx65   | read the bytes from memory pointed to by I into the registers v0 to vX, I is incremented by X+1                                   |No             |
+
+
 ### The Memory:
 This memory has a size or 4kB (4096 bytes)
 The Program Counter (known as **PC**), Index Register (often called **"I"**), and the stack; are all 16 bits long

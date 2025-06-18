@@ -31,6 +31,18 @@ class Memory():
 
     #What methods do I need?
 
+    #Load FONTS
+    def loadFont(self):
+        start = 0x050
+        for i in self.FONT:
+            self.MEM[start] = i
+            start += 1
+
+    #Load ROM
+    def loadROM(self, ROM):
+        #TODO 
+        pass
+
     #Print memory
     def printMem(self):
         #This try to print all the 4096 kb, I dont recommend use it, it's better use printMemV2()
@@ -56,7 +68,7 @@ class Memory():
         """
         counter = 0 
         formatedText = ""
-        
+
         if (start > 0xFFF) or (end > 0xFFF):
             print("Please use numbers between the range")
             return
@@ -72,20 +84,14 @@ class Memory():
             formatedText += f" |{start:03X}->{self.MEM[start]:03X} |"
             counter +=1
             start += 1
+
     #Print ROMs Instruccions
+    def printROM():
+        pass
     
-    #Load FONTS
-    def loadFont(self):
-        start = 0x050
-        for i in self.FONT:
-            self.MEM[start] = i
-            start += 1
-    #Load ROM
 
 mem = Memory()
 mem.printMemV2(80, 165)
 mem.loadFont()
 print("_____________________________________")
 mem.printMemV2(80, 165)
-print("_____________________________________")
-mem.printMemV2(0xF00, 0xFFF)
