@@ -118,6 +118,16 @@ This is the main class, this one, have all the previous classes.
 
 The implementation of this, it's on `src/chip8.py`
 
+## ROMs
+
+### Splash Screer:
+The first test is a very simple splash screen. 
+
+To make this ROM run we'll need to implement the followings Opcodes:
+> - `00E0` - Clear the screen 
+> - `6xnn` - Load normal register with immediate value
+> - `Annn` - Load index register with immediate value
+> - `Dxyn` - Draw sprite to screen (only aligned)
 
 
 ## 🤓 Terms
