@@ -24,7 +24,7 @@ A functional CHIP-8 emulator written in Python.
 ### Opcodes
 |Opcode | Description                                                                                                                       | Implemented?  |
 |-------|-----------------------------------------------------------------------------------------------------------------------------------|---------------|
-|00E0   |clear the screen                                                                                                                   |No             |
+|00E0   |clear the screen                                                                                                                   |Yes             |
 |00EE   |return from subroutine to address pulled from stack                                                                                |No             |
 |0nnn   |jump to native assembler subroutine at 0xNNN                                                                                       |No             |
 |1nnn   |jump to address NNN                                                                                                                |No             |
