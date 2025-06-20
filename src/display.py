@@ -13,7 +13,7 @@ class Display():
         self.SCREEN = pygame.display.set_mode((self.WIDTH*self.SCALE, self.HEIGHT*self.SCALE))
         pygame.display.set_caption('My CHIP8 Emulator')
         self.clock = pygame.time.Clock()
-        self.pixels = [[0 for x in range(self.HEIGHT)] for y in range(self.WIDTH)]
+        self.pixels = [[0 for _ in range(self.HEIGHT)] for _ in range(self.WIDTH)]
 
     def clearScreen(self):
         #this go through each pixel and change it's value from 1(On) to 0(Off)

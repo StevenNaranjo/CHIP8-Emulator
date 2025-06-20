@@ -34,13 +34,13 @@ class Chip8():
         if PC >= 0x200 + self.MEMORY.ROM_SIZE:
             print("End of ROM reached.")
             self.MEMORY.PC = 0x200
-            time.sleep(2)
+            #time.sleep(2)
             return
         
         #HERE WE CALL THE DECODE AND EXECUTE FUNCTION
         self.decode_and_execute(opcode)
         #AND ALSO WE NEED TO INCREMENT THE PC, BUT I THINK THAT WE SHOULD HAVE CARE WITH THIS A THE MOMENT
-        self.MEMORY.PC += 1
+        self.MEMORY.PC += 2
 
     def decode_and_execute(self, opcode):
         #this receive the opcodes, and translate them, and execute them
@@ -55,9 +55,32 @@ class Chip8():
             nn = (opcode & 0x00FF) #With this we get the value of NN
             self.MEMORY.VX[x] = nn # Set Vx to NN in our memory
         elif re.match(r"^A",hexCode):
-            #set I to NNN
+            #Ann -> set I to NNN
             nnn = (opcode & 0x0FFF)
             self.MEMORY.I = nnn
+        elif re.match(r"^D",hexCode):
+            # Dxyn
+            # draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed
+            x = (opcode & 0x0F00) >> 8
+            y = (opcode & 0x00F0) >> 4
+            I = self.MEMORY.I
+            n = (opcode & 0x00F)
+            spriteData = self.MEMORY.MEM[I:I+n]
+            collision = False
+
+            for row in range(n):
+                print(format(row, '08b'))
+                for col in range(8):
+                    if spriteData[row] & (0x80 >> col):
+                        collision |= self.DISPLAY.draw_pixel((self.MEMORY.VX[x] + col) % 64, (self.MEMORY.VX[y] + row) % 32)
+            #time.sleep(2)
+            
+
+            if collision:
+                self.MEMORY.VX[0xF] = 1
+            print(f"x:{x} y:{y} n:{n} I:{I}")
+            print(hexCode)
+            #time.sleep(10)
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 
@@ -65,7 +88,8 @@ class Chip8():
         
         #We need the load the ROM and the FONT
         self.MEMORY.loadFont()
-        self.MEMORY.loadROM("./roms/1-chip8-logo.ch8")
+        #self.MEMORY.loadROM("./roms/1-chip8-logo.ch8")
+        self.MEMORY.loadROM("./roms/2-ibm-logo.ch8")
         
         running = True
 
@@ -90,5 +114,4 @@ class Chip8():
 
 print("HI!")
 chip = Chip8()
-chip.DISPLAY.drawMyName()
 chip.run()
