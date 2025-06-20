@@ -48,6 +48,11 @@ class Chip8():
         if hexCode == "00E0":
             #this clean the screen
             self.DISPLAY.clearScreen()
+        elif re.match(r"^1",hexCode):
+            # 1NNN - Jump to address NNN → this means we need to set PC = NNN
+            NNN = (opcode & 0x0FFF)
+            self.MEMORY.PC = NNN
+            pass
         elif re.match(r"^6",hexCode):
             #6xnn -> set Vx to NN
             # I'm using the r"^6" as my regular expression because there's only one intruction that starts with 6
@@ -82,8 +87,6 @@ class Chip8():
 
             if collision:
                 self.MEMORY.VX[0xF] = 1
-            print(f"x:{x} y:{y} n:{n} I:{I}")
-            print(hexCode)
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 

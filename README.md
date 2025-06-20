@@ -27,7 +27,7 @@ A functional CHIP-8 emulator written in Python.
 |00E0   |clear the screen                                                                                                                   |Yes             |
 |00EE   |return from subroutine to address pulled from stack                                                                                |No             |
 |0nnn   |jump to native assembler subroutine at 0xNNN                                                                                       |No             |
-|1nnn   |jump to address NNN                                                                                                                |No             |
+|1nnn   |jump to address NNN                                                                                                                |Yes             |
 |2nnn   |push return address onto stack and call subroutine at address NNN                                                                  |No             |
 |3xnn   |skip next opcode if vX == NN                                                                                                       |No             |
 |4xnn   |skip next opcode if vX != NN                                                                                                       |No             |
