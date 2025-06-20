@@ -54,6 +54,10 @@ class Chip8():
             x = (opcode & 0x0F00) >> 8 #With this we get the value of X
             nn = (opcode & 0x00FF) #With this we get the value of NN
             self.MEMORY.VX[x] = nn # Set Vx to NN in our memory
+        elif re.match(r"^A",hexCode):
+            #set I to NNN
+            nnn = (opcode & 0x0FFF)
+            self.MEMORY.I = nnn
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 

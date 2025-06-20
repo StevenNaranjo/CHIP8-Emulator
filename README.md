@@ -44,7 +44,7 @@ A functional CHIP-8 emulator written in Python.
 |8xy7   |set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                 |No             |
 |8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |No             |
 |9xy0   |skip next opcode if vX != vY (note: on platforms that have 4 byte opcodes, like F000 on XO-CHIP, this needs to skip four bytes)    |No             |
-|Annn   |set I to NNN                                                                                                                       |No             |
+|Annn   |set I to NNN                                                                                                                       |Yes             |
 |Bnnn   |jump to address NNN + v0                                                                                                           |No             |
 |Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |No             |
 |Dxyn   |draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed                                  |No             |
