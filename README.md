@@ -47,7 +47,7 @@ A functional CHIP-8 emulator written in Python.
 |Annn   |set I to NNN                                                                                                                       |Yes             |
 |Bnnn   |jump to address NNN + v0                                                                                                           |No             |
 |Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |No             |
-|Dxyn   |draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed                                  |No             |
+|Dxyn   |draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed                                  |Yes             |
 |Ex9E   |skip next opcode if key in the lower 4 bits of vX is pressed                                                                       |No             |
 |ExA1   |skip next opcode if key in the lower 4 bits of vX is not pressed                                                                   |No             |
 |Fx07   |set vX to the value of the delay timer                                                                                             |No             |
