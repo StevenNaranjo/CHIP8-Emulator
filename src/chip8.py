@@ -45,7 +45,7 @@ class Chip8():
     def decode_and_execute(self, opcode):
         #this receive the opcodes, and translate them, and execute them
         hexCode = f"{opcode:04X}"
-        if opcode == "00E0":
+        if hexCode == "00E0":
             #this clean the screen
             self.DISPLAY.clearScreen()
         elif re.match(r"^6",hexCode):
