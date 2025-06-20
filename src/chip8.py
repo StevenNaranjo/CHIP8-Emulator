@@ -40,7 +40,7 @@ class Chip8():
         #HERE WE CALL THE DECODE AND EXECUTE FUNCTION
         self.decode_and_execute(opcode)
         #AND ALSO WE NEED TO INCREMENT THE PC, BUT I THINK THAT WE SHOULD HAVE CARE WITH THIS A THE MOMENT
-        self.MEMORY.PC += 2
+        self.MEMORY.PC += 2 #This is because the opcodes uses 2 bytes
 
     def decode_and_execute(self, opcode):
         #this receive the opcodes, and translate them, and execute them
@@ -69,7 +69,6 @@ class Chip8():
             collision = False
 
             for row in range(n):
-                print(format(row, '08b'))
                 for col in range(8):
                     if spriteData[row] & (0x80 >> col):
                         collision |= self.DISPLAY.draw_pixel((self.MEMORY.VX[x] + col) % 64, (self.MEMORY.VX[y] + row) % 32)
@@ -80,7 +79,6 @@ class Chip8():
                 self.MEMORY.VX[0xF] = 1
             print(f"x:{x} y:{y} n:{n} I:{I}")
             print(hexCode)
-            #time.sleep(10)
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 
