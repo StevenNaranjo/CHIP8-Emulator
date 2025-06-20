@@ -129,6 +129,16 @@ To make this ROM run we'll need to implement the following opcodes:
 > - `Annn` - Load index register with immediate value
 > - `Dxyn` - Draw sprite to screen (only aligned)
 
+### IBM logo
+This one draws the IBM logo on the display
+
+To make this ROM run we'll need to implement the following opcodes:
+> - 00E0 - Clear the screen
+> - 6xnn - Load normal register with immediate value
+> - Annn - Load index register with immediate value
+> - 7xnn - Add immediate value to normal register
+> - Dxyn - Draw sprite to screen (un-aligned)
+
 
 ## 🤓 Terms
 
