@@ -32,7 +32,7 @@ A functional CHIP-8 emulator written in Python.
 |3xnn   |skip next opcode if vX == NN                                                                                                       |No             |
 |4xnn   |skip next opcode if vX != NN                                                                                                       |No             |
 |5xy0   |skip next opcode if vX == vY                                                                                                       |No             |
-|6xnn   |set vX to NN                                                                                                                       |No             |
+|6xnn   |set vX to NN                                                                                                                       |Yes             |
 |7xnn   |add NN to vX                                                                                                                       |No             |
 |8xy0   |set vX to the value of vY                                                                                                          |No             |
 |8xy1   |set vX to the result of bitwise vX OR vY                                                                                           |No             |

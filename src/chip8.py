@@ -48,6 +48,12 @@ class Chip8():
         if opcode == "00E0":
             #this clean the screen
             self.DISPLAY.clearScreen()
+        elif re.match(r"^6",hexCode):
+            #6xnn -> set Vx to NN
+            # I'm using the r"^6" as my regular expression because there's only one intruction that starts with 6
+            x = (opcode & 0x0F00) >> 8 #With this we get the value of X
+            nn = (opcode & 0x00FF) #With this we get the value of NN
+            self.MEMORY.VX[x] = nn # Set Vx to NN in our memory
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 
@@ -64,6 +70,7 @@ class Chip8():
             # pygame.QUIT event means the user clicked X to close your window
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print("SALIENDO")
                     running = False
 
             #SO HERE WE SHOULD HAVE THE CALL TO cycle(), to reflect the changes in the display:
