@@ -120,10 +120,10 @@ The implementation of this, it's on `src/chip8.py`
 
 ## ROMs
 
-### Splash Screer:
+### Splash Screen:
 The first test is a very simple splash screen. 
 
-To make this ROM run we'll need to implement the followings Opcodes:
+To make this ROM run we'll need to implement the following opcodes:
 > - `00E0` - Clear the screen 
 > - `6xnn` - Load normal register with immediate value
 > - `Annn` - Load index register with immediate value
