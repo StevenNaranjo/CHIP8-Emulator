@@ -91,7 +91,7 @@ class Memory():
             return
         
         while start <= end:
-            if counter == 5: # Change this number if you want to try another formart, a choose this because it matches with the fonts rows
+            if counter == 5: # Change this number if you want to try another formart, I chose this because it matches with the fonts rows
                 print(formatedText)
                 formatedText = ""
                 counter = 0

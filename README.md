@@ -31,21 +31,21 @@ To run the CHIP8 emulator you have to:
 |Opcode | Description                                                                                                                       | Implemented?  |
 |-------|-----------------------------------------------------------------------------------------------------------------------------------|---------------|
 |00E0   |clear the screen                                                                                                                   |Yes             |
-|00EE   |return from subroutine to address pulled from stack                                                                                |No             |
-|0nnn   |jump to native assembler subroutine at 0xNNN                                                                                       |No             |
+|00EE   |return from subroutine to address pulled from stack                                                                                |Yes             |
+|0nnn   |jump to native assembler subroutine at 0xNNN                                                                                       |Yes             |
 |1nnn   |jump to address NNN                                                                                                                |Yes             |
-|2nnn   |push return address onto stack and call subroutine at address NNN                                                                  |No             |
-|3xnn   |skip next opcode if vX == NN                                                                                                       |No             |
-|4xnn   |skip next opcode if vX != NN                                                                                                       |No             |
-|5xy0   |skip next opcode if vX == vY                                                                                                       |No             |
+|2nnn   |push return address onto stack and call subroutine at address NNN                                                                  |Yes             |
+|3xnn   |skip next opcode if vX == NN                                                                                                       |Yes             |
+|4xnn   |skip next opcode if vX != NN                                                                                                       |Yes             |
+|5xy0   |skip next opcode if vX == vY                                                                                                       |Yes             |
 |6xnn   |set vX to NN                                                                                                                       |Yes             |
 |7xnn   |add NN to vX                                                                                                                       |Yes             |
-|8xy0   |set vX to the value of vY                                                                                                          |No             |
-|8xy1   |set vX to the result of bitwise vX OR vY                                                                                           |No             |
-|8xy2   |set vX to the result of bitwise vX AND vY                                                                                          |No             |
-|8xy3   |set vX to the result of bitwise vX XOR vY                                                                                          |No             |
-|8xy4   |add vY to vX, vF is set to 1 if an overflow happened, to 0 if not, even if X=F!                                                    |No             |
-|8xy5   |subtract vY from vX, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                                            |No             |
+|8xy0   |set vX to the value of vY                                                                                                          |Yes             |
+|8xy1   |set vX to the result of bitwise vX OR vY                                                                                           |Yes             |
+|8xy2   |set vX to the result of bitwise vX AND vY                                                                                          |Yes             |
+|8xy3   |set vX to the result of bitwise vX XOR vY                                                                                          |Yes             |
+|8xy4   |add vY to vX, vF is set to 1 if an overflow happened, to 0 if not, even if X=F!                                                    |Yes             |
+|8xy5   |subtract vY from vX, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                                            |Yes             |
 |8xy6   |set vX to vY and shift vX one bit to the right, set vF to the bit shifted out, even if X=F!                                        |No             |
 |8xy7   |set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                 |No             |
 |8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |No             |
