@@ -193,22 +193,24 @@ class Chip8():
             self.MEMORY.VX[15] = self.MEMORY.VX[y] >> 7
             self.MEMORY.VX[x] = self.MEMORY.VX[y] << 1 & 0xFF
             
-
         elif re.match(r"^9", hexCode):
-            #9xy0 - skip next opcode if vX != vY 
+            #9xy0 - skip next opcode if vX != vY    
             x = (opcode & 0x0F00) >> 8
             y = (opcode & 0x00F0) >> 4
             if self.MEMORY.VX[x] != self.MEMORY.VX[y]:
                 self.MEMORY.PC += 2 
-
-
-
-
+    
         elif re.match(r"^A",hexCode):
             #Ann -> set I to NNN
             nnn = (opcode & 0x0FFF)
             self.MEMORY.I = nnn
 
+        elif re.match(r"^B", hexCode):
+            #Bnnn - jump to address NNN + v0
+            NNN = (opcode & 0x0FFF)
+            self.MEMORY.PC = (NNN + self.MEMORY.VX[0]) & 0xFFF
+            increment_pc = False
+            
 
         elif re.match(r"^D",hexCode):
             # Dxyn
@@ -237,7 +239,8 @@ class Chip8():
         self.MEMORY.loadFont()
         #self.MEMORY.loadROM("./roms/1-chip8-logo.ch8")
         #self.MEMORY.loadROM("./roms/2-ibm-logo.ch8")
-        self.MEMORY.loadROM("./roms/3-corax.ch8")
+        #self.MEMORY.loadROM("./roms/3-corax.ch8")
+        self.MEMORY.loadROM("./roms/4-flags.ch8")
         
         running = True
 
