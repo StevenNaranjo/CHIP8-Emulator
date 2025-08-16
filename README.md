@@ -9,6 +9,12 @@ A functional CHIP-8 emulator written in Python.
 > I'm going to use **PyGame** to build the display 
 > And **re** for regular expression to decode the opcodes :D
 
+## How to run this project?
+To run the CHIP8 emulator you have to: 
+- First install the requirements.txt with the following command `pip install -r requirements.txt` 
+- Second in the `src/chip8.py` file you can select one of the roms that I preloaded in `/roms`
+- Third run the main code in the file `src/chip8.py`
+
 ## Based On the Guide of Tobias the Chip8 specifications are:
 
 - Memory: CHIP-8 has direct access to up to 4 kilobytes of RAM
