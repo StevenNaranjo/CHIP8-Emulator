@@ -51,8 +51,8 @@ To run the CHIP8 emulator you have to:
 |8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |Yes             |
 |9xy0   |skip next opcode if vX != vY (note: on platforms that have 4 byte opcodes, like F000 on XO-CHIP, this needs to skip four bytes)    |Yes             |
 |Annn   |set I to NNN                                                                                                                       |Yes             |
-|Bnnn   |jump to address NNN + v0                                                                                                           |No             |
-|Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |No             |
+|Bnnn   |jump to address NNN + v0                                                                                                           |Yes             |
+|Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |Yes             |
 |Dxyn   |draw 8xN pixel sprite at position vX, vY with data starting at the address in I, I is not changed                                  |Yes             |
 |Ex9E   |skip next opcode if key in the lower 4 bits of vX is pressed                                                                       |No             |
 |ExA1   |skip next opcode if key in the lower 4 bits of vX is not pressed                                                                   |No             |

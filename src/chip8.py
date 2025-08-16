@@ -13,6 +13,7 @@
 
 """
 import time
+import random
 import pygame #for the display
 import re # for regular expressions
 from display import Display
@@ -211,6 +212,10 @@ class Chip8():
             self.MEMORY.PC = (NNN + self.MEMORY.VX[0]) & 0xFFF
             increment_pc = False
             
+        elif re.match(r"^C", hexCode):
+            #Cxnn - set vx to a random value masked (bitwise AND) with NN
+            NN = (opcode & 0x00FF)
+            self.MEMORY.VX[x] = random.randint(0, 255) & nn
 
         elif re.match(r"^D",hexCode):
             # Dxyn
@@ -229,18 +234,20 @@ class Chip8():
 
             if collision:
                 self.MEMORY.VX[0xF] = 1
+
         else:
             print(f"the opcode {hexCode} haven't been implemented yet")
 
         return increment_pc
+    
     def run(self):
         
         #We need the load the ROM and the FONT
         self.MEMORY.loadFont()
         #self.MEMORY.loadROM("./roms/1-chip8-logo.ch8")
         #self.MEMORY.loadROM("./roms/2-ibm-logo.ch8")
-        #self.MEMORY.loadROM("./roms/3-corax.ch8")
-        self.MEMORY.loadROM("./roms/4-flags.ch8")
+        self.MEMORY.loadROM("./roms/3-corax.ch8")
+        #self.MEMORY.loadROM("./roms/4-flags.ch8")
         
         running = True
 
