@@ -173,19 +173,33 @@ class Chip8():
 
             
         if re.match(r"^8[0-9A-F][0-9A-F]6$",hexCode):
-            #8xy6
-            pass
+            #8xy6 - set vX to vY and shift vX one bit to the right, set vF to the bit shifted out, even if X=F!
+            x = (opcode & 0x0F00) >> 8
+            y = (opcode & 0x00F0) >> 4
+            self.MEMORY.VX[15] = self.MEMORY.VX[y] & 0x1
+            self.MEMORY.VX[x] = self.MEMORY.VX[y] >> 1
+        
+        if re.match(r"^8[0-9A-F][0-9A-F]7$",hexCode):
+            #8xy7 - set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!
+            x = (opcode & 0x0F00) >> 8
+            y = (opcode & 0x00F0) >> 4
+            self.MEMORY.VX[15] = 0 if self.MEMORY.VX[y] > self.MEMORY.VX[x] else 1
+            self.MEMORY.VX[x] = (self.MEMORY.VX[y] - self.MEMORY.VX[x]) & 0xFF
         
         if re.match(r"^8[0-9A-F][0-9A-F]E$",hexCode):
-            #8xyE
-            pass
+            #8xyE - set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F
+            x = (opcode & 0x0F00) >> 8
+            y = (opcode & 0x00F0) >> 4
+            self.MEMORY.VX[15] = self.MEMORY.VX[y] >> 7
+            self.MEMORY.VX[x] = self.MEMORY.VX[y] << 1 & 0xFF
+            
 
         elif re.match(r"^9", hexCode):
             #9xy0 - skip next opcode if vX != vY 
             x = (opcode & 0x0F00) >> 8
             y = (opcode & 0x00F0) >> 4
             if self.MEMORY.VX[x] != self.MEMORY.VX[y]:
-                self.MEMORY.PC += 2 #! REVISAR ESTO POR SI AQUELLO
+                self.MEMORY.PC += 2 
 
 
 

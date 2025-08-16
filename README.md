@@ -46,10 +46,10 @@ To run the CHIP8 emulator you have to:
 |8xy3   |set vX to the result of bitwise vX XOR vY                                                                                          |Yes             |
 |8xy4   |add vY to vX, vF is set to 1 if an overflow happened, to 0 if not, even if X=F!                                                    |Yes             |
 |8xy5   |subtract vY from vX, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                                            |Yes             |
-|8xy6   |set vX to vY and shift vX one bit to the right, set vF to the bit shifted out, even if X=F!                                        |No             |
-|8xy7   |set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                 |No             |
-|8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |No             |
-|9xy0   |skip next opcode if vX != vY (note: on platforms that have 4 byte opcodes, like F000 on XO-CHIP, this needs to skip four bytes)    |No             |
+|8xy6   |set vX to vY and shift vX one bit to the right, set vF to the bit shifted out, even if X=F!                                        |Yes             |
+|8xy7   |set vX to the result of subtracting vX from vY, vF is set to 0 if an underflow happened, to 1 if not, even if X=F!                 |Yes             |
+|8xyE   |set vX to vY and shift vX one bit to the left, set vF to the bit shifted out, even if X=F!                                         |Yes             |
+|9xy0   |skip next opcode if vX != vY (note: on platforms that have 4 byte opcodes, like F000 on XO-CHIP, this needs to skip four bytes)    |Yes             |
 |Annn   |set I to NNN                                                                                                                       |Yes             |
 |Bnnn   |jump to address NNN + v0                                                                                                           |No             |
 |Cxnn   |set vx to a random value masked (bitwise AND) with NN                                                                              |No             |
